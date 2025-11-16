@@ -1,22 +1,38 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18'
+        }
+    }
 
     stages {
-        stage("Checkout") {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/jagoankode/belajar_react_ts.git'
+                git branch: 'main', url: 'https://github.com/https://github.com/jagoankode/belajar_react_ts.git'
             }
         }
 
-        stage("Build") {
+        stage('Install Dependencies') {
             steps {
-                echo "Build step running..."
+                sh 'npm install'
             }
         }
 
-        stage("Test") {
+        stage('Run Tests') {
             steps {
-                echo "Running tests..."
+                sh 'npm test -- --watchAll=false'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+
+        stage('Archive Build') {
+            steps {
+                archiveArtifacts artifacts: 'build/**', fingerprint: true
             }
         }
     }
