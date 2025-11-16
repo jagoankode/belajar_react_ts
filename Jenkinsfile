@@ -22,5 +22,12 @@ pipeline {
                 '''
             }
         }
+
+        stage('Check Container Logs') {
+            steps {
+                sh 'docker ps'
+                sh 'docker logs react-app || true'
+            }
+        }
     }
 }
