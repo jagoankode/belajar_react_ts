@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         REGISTRY = "docker.io"
-        IMAGE_NAME = "jagoankode/belajar-react"   // Ganti dengan nama repo kamu
+        IMAGE_NAME = "jagoankode/belajar_react_ts"   // Ganti dengan nama repo kamu
     }
 
     stages {
